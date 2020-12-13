@@ -7,14 +7,15 @@ var todayTime = moment().format("hA");
 console.log(todayTime);
 
 $.each($('.description'), function() {
-    if($(this).prev().text() === todayTime)
+    if(moment($(this).prev().text(), "hA") === todayTime)
     $(this).addClass("present");
         
-    else if ($(this).prev().text() < todayTime)
+    else if (moment($(this).prev().text(), "hA").isBefore(todayTime))
     $(this).addClass("past");
     
     else $(this).addClass("future");
 });
+
 
 //Store Taks
 var allTasks = [];
