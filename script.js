@@ -1,22 +1,52 @@
+// Set current time
 var today = moment();
 $("#currentDay").text(today.format("dddd, MMMM Do"));
 
-var todayTime = moment().format("LT");
+// Assign row color 
+var todayTime = moment().format("hA");
 console.log(todayTime);
 
-var hour = $(".hour").text();
-console.log(hour);
+$.each($('.description'), function() {
+    if($(this).prev().text() === todayTime)
+    $(this).addClass("present");
+        
+    else if ($(this).prev().text() < todayTime)
+    $(this).addClass("past");
+    
+    else $(this).addClass("future");
+});
 
-if (hour === todayTime) {
-    $(".description").addClass("present");
-}
-console.log($(".description"));
+//Store Taks
+var allTasks = [];
 
-if ($(".hour").text() < todayTime) {
-    $(".description").addClass("past");
-}
+$(".saveBtn").click(function(event){
+    var task = $(this).siblings().text();
+    if ($(this).prev().text() !== "") {
+    allTasks.push(task);
+    localStorage.setItem("task", JSON.stringify(allTasks));
+    }
+})
 
-if ($(".hour").text() > todayTime) {
-    $(".description").addClass("future");
-}
+//Display stored  Tasks
+var storedTask = JSON.parse(localStorage.getItem("task"));
+console.log(storedTask); 
+var res = [];
+
+if (storedTask !== null) {
+    for (i=0;i<storedTask.length; i++) {
+        var res = storedTask[i].split("M");
+        console.log(res);
+    
+    $.each($('.description'), function() {
+
+        if
+        ($(this).prev().text().charAt(0) === res[0].charAt(0) &&
+         $(this).prev().text().charAt(1) === res[0].charAt(1))
+
+        $(this).append(res[1]);
+    })
+}}
+
+
+
 
