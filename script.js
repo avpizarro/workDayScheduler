@@ -10,13 +10,14 @@ console.log(todayTime);
 $('.description').each( function(index) {
     var rowTime = $(this).attr("data-index");
     console.log(rowTime);
-    if(rowTime === todayTime)
-    $(this).addClass("present");
-        
-    else if (rowTime < todayTime)
-    $(this).addClass("past");
+
+    if(Number(rowTime) === Number(todayTime))
+        $(this).addClass("present")
+       
+    else if (Number(rowTime) < Number(todayTime))
+        $(this).addClass("past")
     
-    else $(this).addClass("future");
+    else $(this).addClass("future"); 
 });
  console.log($(".description"));
 
