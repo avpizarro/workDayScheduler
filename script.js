@@ -3,19 +3,22 @@ var today = moment();
 $("#currentDay").text(today.format("dddd, MMMM Do"));
 
 // Assign row color 
-var todayTime = moment().format("hA");
+var todayTime = moment().format("H");
 console.log(todayTime);
 
-$.each($('.description'), function() {
-    if(moment($(this).prev().text(), "hA") === todayTime)
+ 
+$('.description').each( function(index) {
+    var rowTime = $(this).attr("data-index");
+    console.log(rowTime);
+    if(rowTime === todayTime)
     $(this).addClass("present");
         
-    else if (moment($(this).prev().text(), "hA").isBefore(todayTime))
+    else if (rowTime < todayTime)
     $(this).addClass("past");
     
     else $(this).addClass("future");
 });
-
+ console.log($(".description"));
 
 //Store Taks
 var allTasks = [];
